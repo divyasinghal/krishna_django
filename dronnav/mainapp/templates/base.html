@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}
+    {% endblock title %}</title>
+    {% comment %} Bootstrap  {% endcomment %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    {% comment %} custom css  {% endcomment %}
+    {% block extracustomcss %}
+    {% endblock extracustomcss %}
+</head>
+<body>
+    {% comment %} start :: navbar {% endcomment %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="{% url 'homepage' %}">Geovitics</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+        {% block layerarr %}
+          
+        {% endblock layerarr %}
+       </ul>
+
+    <div class="form-inline my-2 my-lg-0">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Profile
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+              
+                {% if user.is_authenticated %}
+              <a class="dropdown-item" href="#">Edit Profile</a>
+              <a class="dropdown-item" href="#">Edit users</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+               {% else %}
+                <a class="dropdown-item" href="{% url 'signup' %}">Sign up</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'login' %}">Login</a>
+              {% endif %}
+            </div>
+          </li>
+    </ul>
+     </div>
+  </div>
+</nav>
+    {% comment %} end :: navbar  {% endcomment %}
+    {% comment %} start :: container  {% endcomment %}
+    <div class='container-fluid p-2'>
+    {% block mainbody %}
+    {% endblock mainbody %}
+    </div>
+    {% comment %} end :: container  {% endcomment %}
+
+    {% comment %} Bootstrap  {% endcomment %}
+<script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+{% comment %} custom js  {% endcomment %}
+{% block extracustomjs %}
+    {% endblock extracustomjs %}
+</body>
+</html>
